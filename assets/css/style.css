@@ -1,13 +1,13 @@
 /*-----------------------------------------------------------------------------------
 
     Version: 1.0
-    Author:Manoj Choudhary 
+    Author:Manoj Choudhary
 -----------------------------------------------------------------------------------
 
     CSS INDEX
     ===================
 
-    01.COMMON 
+    01.COMMON
     02.HEADER
     03.BRAND
     04.SERVICES
@@ -21,7 +21,7 @@
 
 -----------------------------------------------------------------------------------*/
 /*===========================
-     01.COMMON css 
+     01.COMMON css
 ===========================*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,700|Lato:300,400,700&display=swap");
 body {
@@ -29,7 +29,9 @@ body {
   font-weight: normal;
   font-style: normal;
   color: #6A6972;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+background-color: #f3f3f3
+}
 
 * {
   margin: 0;
@@ -496,7 +498,7 @@ p {
     transform: rotate(-130deg); } }
 
 /*===========================
-      02.HEADER css 
+      02.HEADER css
 ===========================*/
 /*===== NAVBAR =====*/
 .navbar-area {
@@ -515,9 +517,11 @@ p {
   position: fixed;
   z-index: 99;
   background-color: #fff;
-  -webkit-box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
+
+  -webkit-box-shadow: 0 0 11px rgba(0,0,0,0.13);
+box-shadow: 0 0 11px rgba(0,0,0,0.13);
+z-index: 1029;
+
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -758,17 +762,24 @@ p {
   background-color: #2E2E2E; }
 
 .sticky .navbar-nav .nav-item a {
-  color: #2E2E2E; }
+  color: #404E67; }
 
 .sticky .navbar-nav .nav-item.active > a, .sticky .navbar-nav .nav-item:hover > a {
-  color: #361CC1; }
+  color: #1d8dcd; }
 
 /*===== HEADER HERO =====*/
 .header-hero {
-  position: relative;
-  z-index: 5;
-  background-position: bottom center; }
+  margin-top: 100px;
 
+  }
+ .header-hero-container{
+  background: white;
+      padding: 16px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+      box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+      border: none;
+}
 #particles-1 {
   position: absolute;
   top: 0;
@@ -778,7 +789,9 @@ p {
   z-index: -1; }
 
 .header-hero-content {
-  padding-top: 180px; }
+  padding: 10px;
+  border-bottom: 1px solid #919aa3;
+  padding-left: 60px;}
   @media (max-width: 767px) {
     .header-hero-content {
       padding-top: 100px; } }
@@ -793,9 +806,10 @@ p {
       .header-hero-content .header-sub-title {
         font-size: 30px; } }
   .header-hero-content .header-title {
-    font-size: 38px;
+    font-size: 22px;
     font-weight: 700;
-    color: #fff; }
+    color: #404E67;
+    text-align: left; }
     @media (max-width: 767px) {
       .header-hero-content .header-title {
         font-size: 24px; } }
@@ -803,8 +817,22 @@ p {
       .header-hero-content .header-title {
         font-size: 30px; } }
   .header-hero-content .text {
-    color: #fff;
-    margin-top: 30px; }
+    color: #919aa3 !important;
+    margin-top: 5px;
+    text-align: left;
+    font-size: 14px;
+
+  }
+  .world{
+    position: absolute;
+left: 10px;
+font-size: 26px;
+background: #f3f3f3;
+padding: 10px;
+border-radius: 10px;
+border: 1px solid #9aa3ab;
+box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03), 0 0.9375rem 1.40625rem rgba(4,9,20,0.03), 0 0.25rem 0.53125rem rgba(4,9,20,0.05), 0 0.125rem 0.1875rem rgba(4,9,20,0.03);
+  }
   .header-hero-content .main-btn {
     margin-top: 40px; }
 
@@ -820,7 +848,7 @@ p {
       padding-top: 30px; } }
 
 /*===========================
-      03.BRAND css 
+      03.BRAND css
 ===========================*/
 @media (max-width: 767px) {
   .brand-logo {
@@ -853,7 +881,7 @@ p {
     opacity: 1; }
 
 /*===========================
-      04.SERVICES css 
+      04.SERVICES css
 ===========================*/
 .single-services {
   background-color: #fff;
@@ -946,7 +974,7 @@ p {
       transform: rotate(25deg); }
 
 /*===========================
-      05.ABOUT css 
+      05.ABOUT css
 ===========================*/
 .about-area {
   position: relative;
@@ -996,7 +1024,7 @@ p {
 
 
 /*===========================
-       10.SUBSCRIBE  css 
+       10.SUBSCRIBE  css
 ===========================*/
 .subscribe-area {
   padding: 40px 50px 90px;
@@ -1076,7 +1104,7 @@ p {
       background-position: right center; }
 
 /*===========================
-       11.FOOTER  css 
+       11.FOOTER  css
 ===========================*/
 .footer-area {
   background-position: top center;
@@ -1216,11 +1244,33 @@ p {
 
 
 .version{
-	box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03), 0 0.9375rem 1.40625rem rgba(4,9,20,0.03), 0 0.25rem 0.53125rem rgba(4,9,20,0.05), 0 0.125rem 0.1875rem rgba(4,9,20,0.03);
-    margin-top: 100px;
-    padding-top: 15px;
+  margin-top: 78px;
+      background: #fff;
+      box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.18);
+      padding-top: 12px;
 }
-
+#versions{
+  padding-bottom: 100px;
+    padding-top: 5px;
+    background: #fff;
+    margin-top: 60px;
+    background: #fff;
+}
+.link-to{
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  border: 1px solid #52a5ff;
+  border-radius: 4px;
+}
+.link-to a{
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
+}
 .version-header{
 background: #324fd8;
     padding: 10px;
@@ -1238,12 +1288,12 @@ background: #324fd8;
 	     font-size: 18px;
     font-weight: 700;
     color: #ffffff;
-     
+
 }
 
 .version-header .link-to{
-	 
-     
+
+
 }
 .version-header .link-to a{
 	     color: #fff;
@@ -1254,7 +1304,7 @@ background: #324fd8;
     padding-right: 20px;
     border: 1px solid white;
     border-radius: 4px;
-     
+
 }
 table thead th.v-middle{
 	vertical-align:middle;
@@ -1277,4 +1327,160 @@ table thead th.v-middle{
 }
 .version-modal-body{
 	padding:40px;
+}
+.tiles-row{
+  max-width: 900px;
+  padding: 20px;
+            display: flex;
+            padding-top: 44px;
+
+}
+.tiles{
+  background: -webkit-gradient(linear, left top, right top, from(#2790cf), to(#01dbdf));
+      background: -webkit-gradient(linear, left top, right top, from(#2790cf), to(#01dbdf));
+      max-width: 50%;
+      text-align: left;
+      padding: 20px;
+      color: #fff;
+      border-radius: 5px;
+      position: relative;
+      margin:12px;
+
+}
+.tile-img{
+  max-width: 84px;
+      margin: auto;
+      position: absolute;
+      right: 7px;
+      top: 50%;
+      transform: translateY(-50%);
+}
+.tile-title{
+  font-size: 18px;
+  font-weight: 800;
+  padding-bottom: 10px;
+  padding-right: 100px;
+}
+.tile-para{
+  color: #ffffff;
+  font-size: 14px;
+  padding-right: 100px;
+}
+.tile-link{
+      margin-top: 16px;
+      text-align: left;
+      padding-top: 10px;
+}
+.tile-link a{
+  color: #032234;
+      font-weight: 900;
+      font-size: 14px;
+}
+p.txt{
+  color: #666c73 !important;
+font-size: 14px;
+}
+
+.txt-title{
+  color: #404e67;
+    font-weight: 800;
+    padding-top: 14px;
+}
+.dasboard-note{
+
+}
+
+.table-outer{
+      margin-top: 26px;
+}
+
+.viewLinkBox{
+  background: #e4e4e4;
+text-align: center;
+padding: 10px;
+}
+.placeholder-dev{
+  position: absolute;
+      top: 10px;
+      bottom: 0;
+      left: 10px;
+      right: 10px;
+      z-index: 1;
+      border-radius: 5px;
+      background: #ffffffb5;
+}
+.placeholder-dev p{
+  position: relative;
+  top: 50%;
+  text-align: center;
+  transform: translateY(-50%);
+  font-weight: 900;
+  background: #d6d6d6;
+  padding: 18px;
+  border-radius: 10px;
+}
+@media (max-width: 1600px) {
+  .logo {
+      max-width: 78px;
+  }
+  .navbar-nav .nav-item a{
+        font-size: 14px;
+  }
+  .sticky .navbar {
+    padding: 4px 0;
+}
+.header-hero-content .header-title{
+      font-size: 14px;
+}
+.world{
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 4px;
+}
+.header-hero-content {
+    padding: 8px;
+    padding-left: 34px;
+}
+.header-hero-content .text{
+      font-size: 12px;
+          margin-top: 0px;
+}
+p.txt{
+  font-size: 12px;
+}
+.tile-title{
+  font-size: 16px;
+}
+.tile-para {
+    color: #ffffff;
+    font-size: 12px;
+    padding-right: 100px;
+}
+.tile-link a{
+      font-size: 12px;
+}
+.txt-title{
+  font-size: 12px;
+}
+p{
+  font-size: 12px;
+}
+body{
+  font-size: 14px;
+}
+.link-to a{
+  font-size: 12px;
+}
+h5 {
+    font-size: 14px;
+}
+.form-control{
+  font-size: 12px;
+}
+label{
+      font-size: 12px;
+}
+.period-type{
+      font-size: 12px;
+}
 }
