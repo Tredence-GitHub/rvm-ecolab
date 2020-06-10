@@ -6,6 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var plantRouter = require('./routes/plant');
+var apiRouter = require('./routes/apis');
+
+// const dotenv = require('dotenv')
+// dotenv.config()
 
 var app = express();
 
@@ -19,10 +23,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const db = require('./config/db.js');
+// const db = require('./config/db.js');
+const PORT = process.env.PORT || 5000
 
 app.use('/', indexRouter);
 app.use('/plant_rvm', plantRouter);
+app.use('/api', apiRouter);
 
 
 
@@ -52,4 +58,8 @@ app.use(function(err, req, res, next) {
 //         console.log("SOMETHING WENT WRONG", err);
 //     })
 //     .done();
+
+app.listen(PORT, () => {
+            console.log('Express listening on port:', PORT);
+         });
 module.exports = app;
