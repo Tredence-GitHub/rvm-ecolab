@@ -1,5 +1,8 @@
 <%- include('components/header', {active: 'DIVISION'}); %>
+
+
         <div id="home" class="header-hero bg_cover">
+           <%=  JSON.stringify(defaultDropdownValues)  %>
              <div class="container ">
                <div class="row text-right">
                  <div class="col-12">
@@ -51,7 +54,8 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header hero -->
+        <div id="response"></div>
        <%- include('components/version_division', {viewType: 'Division'}) %>
-       <%- include('components/version_add_new', {viewType: 'Division'}) %>
+       <%- include('components/version_add_new', {viewType: 'Division', defaultDropdownValues:defaultDropdownValues}) %>
        <%- include('components/page_back_to_top') %>
        <%- include('components/footer') %>

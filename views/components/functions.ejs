@@ -1,0 +1,15 @@
+<%
+rederOptions = function(dropdownvalues) {
+        let optionList = '';
+        dropdownvalues.forEach(function(dropdown){
+        optionList+='<option value='+dropdown+'>'+dropdown+'</option>'
+      })
+      return optionList
+}
+
+isItemEnabled = function(timeframesType, dropdownType){
+  if(timeframesType==='YTD' && ((dropdownType === 'stdPriorTonnage') || (dropdownType === 'stdPriorCostVersion'))){
+    return 'disabled'
+  }
+}
+%>

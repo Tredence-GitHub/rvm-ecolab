@@ -1,0 +1,84 @@
+<% include ./functions %>
+<div class="form-row type-2">
+  <div class="col-12 period-type">
+  <b>Standard View</b>
+</div>
+  <div class="form-group col-md-6">
+    <label for="stdPriorTonnage">Prior Tonnage</label>
+    <select id="stdPriorTonnage" class="form-control" <%- isItemEnabled(timeframesType, 'stdPriorTonnage') %>>
+        <option selected>Choose...</option>
+        <%- rederOptions(defaultDropdownValues.preDropDownValues) %>
+    </select>
+  </div>
+
+<div class="form-group col-md-6">
+  <label for="inputEmail4">Prior Cost Version</label>
+   <select id="stdPriorCostVersion" class="form-control" <%- isItemEnabled(timeframesType, 'stdPriorCostVersion') %>>
+  <option selected>Choose...</option>
+  <%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>
+  </select>
+</div>
+<div class="form-group col-md-6">
+<label for="inputEmail4">Current Tonnage</label>
+ <select id="stdCurrentTonnage" class="form-control">
+    <option selected>Choose...</option>
+    <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
+    </select>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="inputEmail4">Current Cost Version</label>
+     <select id="stdCurrentCostVersion" class="form-control">
+    <option selected>Choose...</option>
+    <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
+    </select>
+  </div>`
+</div>
+<div class="form-row type-2">
+  <div class="col-12 period-type">
+  <b>Forecast View </b>
+</div>
+  <div class="form-group col-md-4">
+  <label for="inputEmail4">Prior Tonnage Type</label>
+   <select id="inputState" class="form-control">
+    <option selected>Choose...</option>
+    <option value='actual'>Actual</option>
+    <option value='forcasts'>Forcasts</option>
+  </select>
+</div>
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Prior Tonnage</label>
+   <select id="inputState" class="form-control">
+  <option selected>Choose...</option>
+  </select>
+</div>
+
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Prior Cost Version</label>
+   <select id="inputState" class="form-control">
+  <option selected>Choose...</option>
+  </select>
+</div>
+
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Current Tonnage Type</label>
+  <select id="inputState" class="form-control">
+   <option selected>Choose...</option>
+   <option value='actual'>Actual</option>
+   <option value='forcasts'>Forcasts</option>
+ </select>
+</div>
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Current Tonnage</label>
+   <select id="inputState" class="form-control">
+  <option selected>Choose...</option>
+  </select>
+</div>
+
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Current Cost Version</label>
+   <select id="inputState" class="form-control">
+  <option selected>Choose...</option>
+  </select>
+</div>
+
+</div>
