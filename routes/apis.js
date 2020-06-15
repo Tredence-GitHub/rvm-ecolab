@@ -120,7 +120,7 @@ router.get('/getDropDownValues',function (req,res,next){
 router.post('/saveVersionInfo', (req, res) =>{
   try {
     let versionInfo = req.body
-    let versionName = 'someuniquename3'
+    let versionName = `${versionInfo.viewName}-${versionInfo.viewType}`
     db.version.findOrCreate({
       where : {versionName : versionName},
       defaults : versionInfo
