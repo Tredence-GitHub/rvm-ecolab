@@ -3,12 +3,13 @@ var router = express.Router();
 
 
 const { successObj, failedObj } = require('../lib/responseTypes.js');
-    const db = require('../config/db.js')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   try {
-
+    console.log("trying to get the connection to db");
+    const db = require('../config/db.js')
     console.log("trying to connect to db");
+    
     db.sequelize.authenticate()
         .then(function() {
             console.log("Connected to database !!!");
@@ -33,8 +34,8 @@ router.get('/getDropDownValues',function (req,res,next){
   try {
     //all info of request will be in req
     // info which you return will in res
-
-
+    const db = require('../config/db.js')
+    
     let sqlQueryForYTDandMoM = `SELECT * FROM Standard_vw`
     let sqlQueryForQoQ = `SELECT * FROM Quarters`
     let sqlQueryForCost = `SELECT * FROM cost`

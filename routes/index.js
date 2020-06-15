@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../config/db.js')
+
 const { successObj, failedObj } = require('../lib/responseTypes.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   try {
+    const db = require('../config/db.js')
     //all info of request will be in req
     // info which you return will in res
     let sqlQueryForYTDandMoM = `SELECT * FROM Standard_vw`
