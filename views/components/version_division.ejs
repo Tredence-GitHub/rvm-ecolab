@@ -1,3 +1,8 @@
+<script>
+
+     console.log("VDATA", <%-  JSON.stringify(versionData)  %>)
+</script>
+
 <section id="versions" style="    padding-bottom: 100px;">
 <div class="container header-hero-container version" style="background:#fff;">
   <div class="row justify-content-center">
@@ -22,7 +27,7 @@
         <tr>
           <th class='v-middle' >#</th>
           <th class='v-middle'>Version Name</th>
-          <th class='v-middle'>Version Type</th>
+          <th class='v-middle'>Timeframes Type</th>
           <th class='v-middle'>Requested By</th>
           <th class='v-middle'>Requested Date</th>
           <th class='v-middle'>Status</th>
@@ -31,76 +36,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>SALES_YTD_P01_2019_P01_2020</td>
-          <td>YTD / MoM / QoQ</td>
-          <td>Jeffery Riley <small> jeffery.riley@ecolab.com</small></td>
-          <td>2020-05-13 12:30PM</td>
-          <td class="green">Processed</td>
-          <td>-</td>
-          <td>2020-05-15 12:30PM</td>
-        </tr>
+        <!--<td class="green">Processed</td> -->
+        <% for(var i=0; i < versionData.length; i++) { %>
+           <tr>
+             <td><%= i+1 %></td>
+             <td><%= versionData[i].versionName %></td>
+             <td><%= versionData[i].viewType %></td>
+             <td><%= versionData[i].userEmail %></td>
+             <td><%= versionData[i].requestedDate %></td>
+             <td class='red'><%= versionData[i].status %></td>
+             <td><%= versionData[i].refreshEta %></td>
+             <td><%= versionData[i].expiryDate %></td>
+           </tr>
+        <% } %>
+        
       </tbody>
 
     </table>

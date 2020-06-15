@@ -21,6 +21,7 @@
            </select>
         </div>
       </div>
+      <input id="viewType"  type="hidden" name="viewType" value=<%=  viewType %>>
       <div class="" id="newRequestFormModalContent">
 
       </div>
@@ -28,15 +29,8 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Continue</button>
+    <button type="button" class="btn btn-primary" id="continueToSave">Continue</button>
   </div>
 </div>
 </div>
 </div>
-
-
-  <script type='text/javascript'>
-   var defaultDropdownValues =<%-JSON.stringify(defaultDropdownValues)%>
-
- </script>
-</script>

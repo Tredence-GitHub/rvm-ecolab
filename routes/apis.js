@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   try {
     console.log("trying to get the connection to db");
     console.log("trying to connect to db");
-    
+
     db.sequelize.authenticate()
         .then(function() {
             console.log("Connected to database !!!");
@@ -119,7 +119,7 @@ router.get('/getDropDownValues',function (req,res,next){
 
 router.post('/saveVersionInfo', (req, res) =>{
   try {
-    let versionInfo = req.body.versionInfo
+    let versionInfo = req.body
     let versionName = 'someuniquename3'
     db.version.findOrCreate({
       where : {versionName : versionName},

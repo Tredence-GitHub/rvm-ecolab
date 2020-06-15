@@ -1,0 +1,101 @@
+<%
+
+%>
+ <script>
+    var defaultDropdownValues = <%- JSON.stringify(defaultDropdownValues)  %>
+    console.log(defaultDropdownValues);
+
+
+
+    $(document).on('change', '.std', function(e){
+            // let keyName = '';
+            // if($(this).attr('id')==='stdPriorTonnage'){
+            //   keyName = 'postDropDownValues'
+            // }
+            // else{
+            //   keyName = 'preDropDownValues'
+            // }
+            // let dataTargetItem = $(this).attr('data-target-item');
+            // dataTargetItem = '#'+dataTargetItem;
+            // let dataTargetItemVal = $(dataTargetItem).val();
+            // let currentVal = $(this.val();
+            // if((currentVal!=='') && dataTargetItemVal==''){
+            //      let items = defaultDropdownValues[keyName]
+            // }
+
+
+    })
+
+    $(document).on('click', '#continueToSave', function(e){
+      var now = new Date();
+
+      var formData = {};
+          formData["viewName"]               =  $('#viewType').val();
+          formData["viewType"]               =  $('#timeframesType').val();
+          formData["curCostEstStd"]          =  $("#stdCurrentCostVersion").val();
+          formData["curTonPeriodStd"]        =  $("#stdCurrentTonnage").val();
+          formData["priorCostEstStd"]        =  $("#stdPriorCostVersion").val();
+          formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
+          formData["userEmail"]              =  'user@test.com';
+          formData["requestedDate"]          =  now;
+          formData["expiryDate"]              =  '-';
+          formData["refreshEta"]              =  '-';
+          formData["status"]              =  'Pending';
+
+
+          swal({
+            title: "Are you sure?",
+            text: "You are about to request for a new custom version!",
+            icon: "warning",
+              dangerMode: true,
+               buttons: {
+                 cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                  },
+                  confirm: {
+                    text: "Continue",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: false
+                  }
+               },
+             })
+             .then(name => {
+               if (!name) throw null;
+               $.ajax({
+                   url: '/api/saveVersionInfo',
+                   type: 'post',
+                   contentType: 'application/json',
+                   data:JSON.stringify(formData),
+                   success: function( data){
+                       console.log("bb",data)
+
+                      if(data.responseType=='success'){
+                        swal("New request created successfully!", {
+                              icon: "success",
+                            }).then(function(){
+                              $('#staticBackdrop').modal('hide')
+                            });
+                      }
+                      else{
+                        swal(data.responseDesc, {
+                              icon: "error",
+                            });
+
+                      }
+
+                   },
+                   error: function(error){
+                     swal('Unknown error occured!', {
+                           icon: "error",
+                      });
+                   }
+               });
+             })
+    })
+ </script>
