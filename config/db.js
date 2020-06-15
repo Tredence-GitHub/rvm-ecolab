@@ -40,6 +40,6 @@ db.op = op;
 db.config = dbConfig;
 
 //Models/tables
-// db.recommendationPage = require('../models/RecommendationPage.js')(sequelize, Sequelize);
+db.version = require('../models/version.js')(sequelize, Sequelize);
 
 module.exports = db

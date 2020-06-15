@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-
+const db = require('../config/db.js')
 const { successObj, failedObj } = require('../lib/responseTypes.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   try {
     console.log("trying to get the connection to db");
-    const db = require('../config/db.js')
     console.log("trying to connect to db");
     
     db.sequelize.authenticate()
@@ -21,10 +20,10 @@ router.get('/', function(req, res, next) {
             res.json(err)
         })
         .done();
-  } catch (e) {
-      console.log("error in default api route",e);
-      failedObj.responseDesc = e.message
-      failedObj.responseData = e
+  } catch (error) {
+      console.log("error in default api route",error);
+      failedObj.responseDesc = error.message
+      failedObj.responseData = error
       res.json(failedObj)
   }
 });
@@ -34,8 +33,7 @@ router.get('/getDropDownValues',function (req,res,next){
   try {
     //all info of request will be in req
     // info which you return will in res
-    const db = require('../config/db.js')
-    
+
     let sqlQueryForYTDandMoM = `SELECT * FROM Standard_vw`
     let sqlQueryForQoQ = `SELECT * FROM Quarters`
     let sqlQueryForCost = `SELECT * FROM cost`
@@ -111,12 +109,60 @@ router.get('/getDropDownValues',function (req,res,next){
       successObj.responseDesc = 'collected dropdown values'
       res.render('components/version_modal_content', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType})
     })
-  } catch (e) {
-    console.log("error in api",e);
-    failedObj.responseData = e
-    failedObj.responseDesc = e.message
+  } catch (error) {
+    console.log("error in api",error);
+    failedObj.responseData = error
+    failedObj.responseDesc = error.message
     res.json(failedObj)
   }
 })
 
+router.post('/saveVersionInfo', (req, res) =>{
+  try {
+    let versionInfo = req.body.versionInfo
+    let versionName = 'someuniquename3'
+    db.version.findOrCreate({
+      where : {versionName : versionName},
+      defaults : versionInfo
+    }).spread((versionData, created) =>{
+      if (created) {
+        successObj.responseData = versionData
+        successObj.responseDesc = "A version is successfully registered"
+        res.json(successObj)
+      } else {
+        failedObj.responseDesc = "A version is already registered with these details , you can navigate to version table below and view report as per these details."
+        failedObj.responseData = []
+        res.json(failedObj)
+      }
+    })
+  } catch (error) {
+    console.log("error in api",error);
+    failedObj.responseData = error
+    failedObj.responseDesc = error.message
+    res.json(failedObj)
+  }
+})
+
+router.get('/getVersionInfo', (req,res) =>{
+  try {
+    let sectionType = req.query.sectionType
+    db.version.findAll({
+      where: {viewName : sectionType}
+    }).then(viewData =>{
+      successObj.responseData = viewData
+      successObj.responseDesc = `Version Data is successfully collected for view - ${sectionType}`
+      res.json(successObj)
+    }).catch(error => {
+      console.log("error in api",error);
+      failedObj.responseData = error
+      failedObj.responseDesc = error.message
+      res.json(failedObj)
+    })
+  } catch (error) {
+    console.log("error in api",error);
+    failedObj.responseData = error
+    failedObj.responseDesc = error.message
+    res.json(failedObj)
+  }
+})
 module.exports = router;
