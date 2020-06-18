@@ -1313,7 +1313,7 @@ table thead th.v-middle{
 }
 
 .type-2{
-	    background: #e7e7e7;
+	    background: #e7e7e782;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -1483,4 +1483,15 @@ label{
 .period-type{
       font-size: 12px;
 }
+}
+
+
+select option:disabled {
+    color: rgb(192, 192, 192);
+
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: #f6eeee;
+    opacity: 1;
+        cursor: not-allowed;
 }

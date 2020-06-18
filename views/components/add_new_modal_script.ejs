@@ -28,20 +28,35 @@
 
     $(document).on('click', '#continueToSave', function(e){
       var now = new Date();
-
       var formData = {};
-          formData["viewName"]               =  $('#viewType').val();
-          formData["viewType"]               =  $('#timeframesType').val();
-          formData["curCostEstStd"]          =  $("#stdCurrentCostVersion").val();
-          formData["curTonPeriodStd"]        =  $("#stdCurrentTonnage").val();
-          formData["priorCostEstStd"]        =  $("#stdPriorCostVersion").val();
-          formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
-          formData["userEmail"]              =  'user@test.com';
-          formData["requestedDate"]          =  now;
-          formData["expiryDate"]              =  '-';
-          formData["refreshEta"]              =  '-';
-          formData["status"]              =  'Pending';
-
+          if($('#view').val()==='standard'){
+              formData["viewName"]               =  $('#viewType').val();
+              formData["viewType"]               =  $('#timeframesType').val();
+              formData["curCostEstStd"]          =  $("#stdCurrentCostVersion").val();
+              formData["curTonPeriodStd"]        =  $("#stdCurrentTonnage").val();
+              formData["priorCostEstStd"]        =  $("#stdPriorCostVersion").val();
+              formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
+              formData["userEmail"]              =  'user@test.com';
+              formData["requestedDate"]          =  now;
+              formData["expiryDate"]              =  '-';
+              formData["refreshEta"]              =  '-';
+              formData["status"]              =  'Pending';
+           }
+           else{
+             formData["viewName"]               =  $('#viewType').val();
+             formData["viewType"]               =  $('#timeframesType').val();
+             formData["priorTonTypeForecast"]   =  $("#forcastPriorTonnageType").val();
+             formData["forcastPriorTonnage"]    =  $("#priorTonPeriodForecast").val();
+             formData["priorCostEstForecast"]        =  $("#forcastPriorCostVersion").val();
+             formData["curTonTypeForecast"]      =  $('#forcastCurrentTonnageType').val();
+             formData["curTonPeriodForecast"]     = $('#forcastCurrentTonnage').val();
+             formData["curCostEstForecast"]     = $('#forcastCurrentCostVersion').val();
+             formData["userEmail"]              =  'user@test.com';
+             formData["requestedDate"]          =  now;
+             formData["expiryDate"]              =  '-';
+             formData["refreshEta"]              =  '-';
+             formData["status"]              =  'Pending';
+           }
 
           swal({
             title: "Are you sure?",
@@ -79,7 +94,8 @@
                         swal("New request created successfully!", {
                               icon: "success",
                             }).then(function(){
-                              $('#staticBackdrop').modal('hide')
+                              $('#staticBackdrop').modal('hide');
+                              location.reload();
                             });
                       }
                       else{
@@ -97,5 +113,66 @@
                    }
                });
              })
+    })
+
+
+    //View - Division -Std
+    //User sets Current Tonnage, based on selected value new value need to be set for Propr Tonnage.
+    rederOptionsByCondition = function(dropdownvalues, conditionVal) {
+            let optionList = '';
+            let disabled = '';
+            dropdownvalues.forEach(function(dropdown){
+            if(conditionVal === dropdown){
+              disabled = 'disabled';
+            }
+            optionList+='<option value='+dropdown+' '+disabled+'>'+dropdown+'</option>'
+          })
+          return optionList
+    }
+
+
+    $(document).on('change', '#stdCurrentTonnage', function(e){
+      let timeFrameType = $('#timeframesType').val();
+      let stdCurrentTonnage = $('#stdCurrentTonnage').val()
+      if(timeFrameType==='YTD'){
+        //Setting  stdPriorTonnage
+        let currentTonnageAttr = stdCurrentTonnage.split("_")
+        let stdPriorTonnageYear = (parseInt(currentTonnageAttr[0]) - 1)
+        let stdPriorTonnage =stdPriorTonnageYear+'_'+currentTonnageAttr[1];
+        $('#stdPriorTonnage').val(stdPriorTonnage)
+      }
+      if(timeFrameType=='MoM' || timeFrameType=='QoQ'){
+        $('#stdPriorTonnage option').remove();
+        $('#stdPriorTonnage').removeAttr("disabled");
+        $('#stdPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.preDropDownValues, stdCurrentTonnage));
+      }
+    })
+
+    $(document).on('change', '#stdCurrentCostVersion', function(e){
+      //Setting stdPriorCostVersion
+      let stdCostVersion = $('#stdCurrentCostVersion').val()
+      let currentCostVersionAttr = stdCostVersion.split("_")
+      let stdCurrentCostVersionYear = (parseInt(currentCostVersionAttr[0]) - 1)
+      let stdCurrentCostVersion = stdCurrentCostVersionYear+'_P12_StandardCost';
+      console.log("stdPriorCostVersion -- ", stdCurrentCostVersion)
+      $('#stdPriorCostVersion').val(stdCurrentCostVersion)
+    })
+    //View - Division - forcasts
+    $(document).on('change', '#forcastPriorTonnageType', function(e){
+        let forcastPriorTonnageType  = $('#forcastPriorTonnageType').val();
+        if(forcastPriorTonnageType==='actual'){
+            let currentYear = defaultDropdownValues.postDropDownValues[0]
+            currentYear = (parseInt(currentYear.split('_')[0])-1)
+            $("#forcastPriorTonnage option").remove();
+            $("#forcastPriorCostVersion option").remove();
+            $("#forcastPriorTonnage").append('<option value='+currentYear+'>'+currentYear+'</option>');
+            $("#forcastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>')
+        }
+        else{
+          $("#forcastPriorTonnage option").remove();
+          $("#forcastPriorCostVersion option").remove();
+          $("#forcastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
+          $("#forcastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>')
+        }
     })
  </script>

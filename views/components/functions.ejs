@@ -6,6 +6,18 @@ rederOptions = function(dropdownvalues) {
       })
       return optionList
 }
+rederOptionsByCondition = function(dropdownvalues, timeframesType) {
+       let optionList = '';
+        dropdownvalues.forEach(function(dropdown,index){
+          let disabled = '';
+          if((timeframesType === 'MoM' || timeframesType === 'QoQ') && index==0){
+            disabled = 'disabled'
+          }
+          optionList+='<option value='+dropdown+' '+disabled+'>'+dropdown+'</option>'
+      })
+      return optionList
+}
+
 
 isItemEnabled = function(timeframesType, dropdownType){
   if(timeframesType==='YTD' && ((dropdownType === 'stdPriorTonnage') || (dropdownType === 'stdPriorCostVersion'))){

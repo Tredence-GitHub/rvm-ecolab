@@ -12,9 +12,17 @@
     <form id="newRequestForm">
       <div class="form-row">
         <div class="form-group col-md-4">
+          <label for="inputPassword4">View Type</label>
+           <select id="view"  class="form-control">
+              <option disabled value=''>Choose...</option>
+              <option value ='standard' selected>Standard</option>
+              <option value="forcast">Forecast </option>
+           </select>
+        </div>
+        <div class="form-group col-md-4">
           <label for="inputPassword4">Timeframes Type</label>
            <select id="timeframesType" class="form-control">
-              <option selected>Choose...</option>
+              <option selected value=''>Choose...</option>
               <option value="YTD">YTD</option>
               <option value="MoM">MoM</option>
               <option value="QoQ">QoQ</option>

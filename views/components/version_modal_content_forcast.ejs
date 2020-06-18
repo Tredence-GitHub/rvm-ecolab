@@ -1,0 +1,55 @@
+<% include ./functions %>
+
+
+<div class="form-row type-2">
+  <div class="col-12 period-type">
+  <b>Forecast View </b>
+</div>
+  <div class="form-group col-md-4">
+  <label for="inputEmail4">Prior Tonnage Type</label>
+   <select id="forcastPriorTonnageType" class="form-control">
+    <option selected>Choose...</option>
+    <option value='actual'>Actual</option>
+    <option value='forcasts'>Forcasts</option>
+  </select>
+</div>
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Prior Tonnage</label>
+   <select id="forcastPriorTonnage" class="form-control">
+       <option selected value=''>Choose...</option>
+       <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
+  </select>
+</div>
+
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Prior Cost Version</label>
+   <select id="forcastPriorCostVersion" class="form-control">
+       <option selected value=''>Choose...</option>
+       <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
+  </select>
+</div>
+
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Current Tonnage Type</label>
+  <select id="forcastCurrentTonnageType" class="form-control">
+   <option value='forcasts' selected>Forcasts</option>
+ </select>
+</div>
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Current Tonnage</label>
+   <select id="forcastCurrentTonnage" class="form-control">
+      <option selected value=''>Choose...</option>
+      <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
+  </select>
+</div>
+
+<div class="form-group col-md-4">
+  <label for="inputEmail4">Current Cost Version</label>
+   <select id="forcastCurrentCostVersion" class="form-control">
+  <option selected value=''>Choose...</option>
+    <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
+  </select>
+</div>
+
+</div>
+<% include ./add_new_modal_script %>

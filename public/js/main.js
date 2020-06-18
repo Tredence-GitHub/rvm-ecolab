@@ -322,45 +322,33 @@ $(function () {
 
 $(document).ready(function() {
     $('#example').DataTable();
-    $(document).on('change', '#timeframesType', function(e){
-      let timeframesType = $(this).val();
-      $.ajax({
-          url: '/api/getDropDownValues',
-          dataType: 'html',
-          type: 'get',
-          contentType: 'application/html',
-          data:{timeframesType:timeframesType},
-          success: function( data){
-              console.log("aa",data)
-              $('#newRequestFormModalContent').html( data  );
-          },
-          error: function(error){
-              console.log("bb",error );
-          }
-      });
-    })
-
-    //View - Division -Std
-    //User sets Current Tonnage, based on selected value new value need to be set for Propr Tonnage.
-    $(document).on('change', '#stdCurrentTonnage', function(e){
-      let timeFrameType = $('#timeframesType').val();
-      if(timeFrameType==='YTD'){
-        //Setting  stdPriorTonnage
-        let stdCurrentTonnage = $('#stdCurrentTonnage').val()
-        let currentTonnageAttr = stdCurrentTonnage.split("_")
-        let stdPriorTonnageYear = (parseInt(currentTonnageAttr[0]) - 1)
-        let stdPriorTonnage =stdPriorTonnageYear+'_'+currentTonnageAttr[1];
-        $('#stdPriorTonnage').val(stdPriorTonnage)
+    $(document).on('change', '#timeframesType, #view', function(e){
+      let timeframesType = $('#timeframesType').val();
+      let view = $('#view').val()
+      if(view ==='forcast'){
+        $('#timeframesType').attr('disabled', 'disabled');
+        timeframesType = 'YTD'
+        $('#timeframesType').val('YTD')
       }
-    })
-    $(document).on('change', '#stdCurrentCostVersion', function(e){
-      //Setting stdPriorCostVersion
-      let stdCostVersion = $('#stdCurrentCostVersion').val()
-      let currentCostVersionAttr = stdCostVersion.split("_")
-      let stdCurrentCostVersionYear = (parseInt(currentCostVersionAttr[0]) - 1)
-      let stdCurrentCostVersion = stdCurrentCostVersionYear+'_P12_StandardCost';
-      console.log("stdPriorCostVersion -- ", stdCurrentCostVersion)
-      $('#stdPriorCostVersion').val(stdCurrentCostVersion)
+      else{
+        $('#timeframesType').removeAttr('disabled');
+      }
+      if(timeframesType!=''){
+            $.ajax({
+                url: '/api/getDropDownValues',
+                dataType: 'html',
+                type: 'get',
+                contentType: 'application/html',
+                data:{timeframesType:timeframesType, viewType:view},
+                success: function( data){
+                    console.log("aa",data)
+                    $('#newRequestFormModalContent').html( data  );
+                },
+                error: function(error){
+                    console.log("bb",error );
+                }
+            });
+          }
     })
 
 } )

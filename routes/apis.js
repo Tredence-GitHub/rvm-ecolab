@@ -107,7 +107,12 @@ router.get('/getDropDownValues',function (req,res,next){
       console.log("pre",preDropDownValuesForYTD,"\npost",postDropDownValuesForYTD,"\nmom",dropDownValuesForMoM,"\nqoq",dropDownValuesForQoQ,"pre cost",preDropDownValuesForCost,"\npost cost",postDropDownValuesForCost);
       successObj.responseData = finalData
       successObj.responseDesc = 'collected dropdown values'
-      res.render('components/version_modal_content', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType})
+      if(req.query.viewType==='standard'){
+        res.render('components/version_modal_content_standard', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
+      }
+      else if(req.query.viewType==='forcast'){
+        res.render('components/version_modal_content_forcast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
+      }
     })
   } catch (error) {
     console.log("error in api",error);
