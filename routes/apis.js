@@ -110,7 +110,7 @@ router.get('/getDropDownValues',function (req,res,next){
       if(req.query.viewType==='standard'){
         res.render('components/version_modal_content_standard', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
-      else if(req.query.viewType==='forecasts'){
+      else if(req.query.viewType==='forecast'){
         res.render('components/version_modal_content_forecast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
     })
@@ -125,7 +125,6 @@ router.get('/getDropDownValues',function (req,res,next){
 router.post('/saveVersionInfo', (req, res) =>{
   try {
     let versionInfo = req.body
-    // console.log("versionInfo",versionInfo);
     let versionName = ''
     if (versionInfo.selectedView === 'standard') {
       versionName = `${versionInfo.viewType} - ${versionInfo.priorTonPeriodStd} vs ${versionInfo.curTonPeriodStd} | ${versionInfo.priorCostEstStd} vs ${versionInfo.curCostEstStd}`
@@ -157,7 +156,7 @@ router.post('/saveVersionInfo', (req, res) =>{
 router.get('/getVersionInfo', (req,res) =>{
   try {
     let sectionType = req.query.sectionType
-    
+
     db.version.findAll({
       where: {viewName : sectionType},
       order: [['requestedDate','desc']]
