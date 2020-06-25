@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
   try {
     let sectionType = 'division'
     db.version.findAll({
-      where: {viewName : sectionType}
+      where: {viewName : sectionType},
+      order: [['requestedDate','desc']]
     }).then(viewData =>{
       successObj.responseData = viewData
       successObj.responseDesc = `Version Data is successfully collected for view - ${sectionType}`

@@ -45,18 +45,19 @@
            else{
              formData["viewName"]               =  $('#viewType').val();
              formData["viewType"]               =  $('#timeframesType').val();
-             formData["priorTonTypeForecast"]   =  $("#forcastPriorTonnageType").val();
-             formData["forcastPriorTonnage"]    =  $("#priorTonPeriodForecast").val();
-             formData["priorCostEstForecast"]        =  $("#forcastPriorCostVersion").val();
-             formData["curTonTypeForecast"]      =  $('#forcastCurrentTonnageType').val();
-             formData["curTonPeriodForecast"]     = $('#forcastCurrentTonnage').val();
-             formData["curCostEstForecast"]     = $('#forcastCurrentCostVersion').val();
+             formData["priorTonTypeForecast"]   =  $("#forecastPriorTonnageType").val();
+             formData["priorTonPeriodForecast"]    =  $("#forecastPriorTonnage").val();
+             formData["priorCostEstForecast"]        =  $("#forecastPriorCostVersion").val();
+             formData["curTonTypeForecast"]      =  $('#forecastCurrentTonnageType').val();
+             formData["curTonPeriodForecast"]     = $('#forecastCurrentTonnage').val();
+             formData["curCostEstForecast"]     = $('#forecastCurrentCostVersion').val();
              formData["userEmail"]              =  'user@test.com';
              formData["requestedDate"]          =  now;
              formData["expiryDate"]              =  '-';
              formData["refreshEta"]              =  '-';
              formData["status"]              =  'Pending';
            }
+           formData["selectedView"] = $('#view').val()
 
           swal({
             title: "Are you sure?",
@@ -157,22 +158,22 @@
       console.log("stdPriorCostVersion -- ", stdCurrentCostVersion)
       $('#stdPriorCostVersion').val(stdCurrentCostVersion)
     })
-    //View - Division - forcasts
-    $(document).on('change', '#forcastPriorTonnageType', function(e){
-        let forcastPriorTonnageType  = $('#forcastPriorTonnageType').val();
-        if(forcastPriorTonnageType==='actual'){
+    //View - Division - forecasts
+    $(document).on('change', '#forecastPriorTonnageType', function(e){
+        let forecastPriorTonnageType  = $('#forecastPriorTonnageType').val();
+        if(forecastPriorTonnageType==='actual'){
             let currentYear = defaultDropdownValues.postDropDownValues[0]
             currentYear = (parseInt(currentYear.split('_')[0])-1)
-            $("#forcastPriorTonnage option").remove();
-            $("#forcastPriorCostVersion option").remove();
-            $("#forcastPriorTonnage").append('<option value='+currentYear+'>'+currentYear+'</option>');
-            $("#forcastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>')
+            $("#forecastPriorTonnage option").remove();
+            $("#forecastPriorCostVersion option").remove();
+            $("#forecastPriorTonnage").append('<option value='+currentYear+'>'+currentYear+'</option>');
+            $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>')
         }
         else{
-          $("#forcastPriorTonnage option").remove();
-          $("#forcastPriorCostVersion option").remove();
-          $("#forcastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
-          $("#forcastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>')
+          $("#forecastPriorTonnage option").remove();
+          $("#forecastPriorCostVersion option").remove();
+          $("#forecastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
+          $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>')
         }
     })
  </script>

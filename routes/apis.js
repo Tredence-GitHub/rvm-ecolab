@@ -110,8 +110,8 @@ router.get('/getDropDownValues',function (req,res,next){
       if(req.query.viewType==='standard'){
         res.render('components/version_modal_content_standard', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
-      else if(req.query.viewType==='forcast'){
-        res.render('components/version_modal_content_forcast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
+      else if(req.query.viewType==='forecast'){
+        res.render('components/version_modal_content_forecast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
     })
   } catch (error) {
@@ -125,9 +125,14 @@ router.get('/getDropDownValues',function (req,res,next){
 router.post('/saveVersionInfo', (req, res) =>{
   try {
     let versionInfo = req.body
-    let versionName = `${versionInfo.viewName}-${versionInfo.viewType}`
+    let versionName = ''
+    if (versionInfo.selectedView === 'standard') {
+      versionName = `${versionInfo.viewType} - ${versionInfo.priorTonPeriodStd} vs ${versionInfo.curTonPeriodStd} | ${versionInfo.priorCostEstStd} vs ${versionInfo.curCostEstStd}`
+    } else {
+      versionName = `${versionInfo.priorTonTypeForecast} vs ${versionInfo.curTonTypeForecast}  - ${versionInfo.priorTonPeriodForecast} vs ${versionInfo.curTonPeriodForecast} | ${versionInfo.priorCostEstForecast} vs ${versionInfo.curCostEstForecast}`
+    }
     db.version.findOrCreate({
-      where : {versionName : versionName},
+      where : {versionName : versionName, viewName: versionInfo.viewName},
       defaults : versionInfo
     }).spread((versionData, created) =>{
       if (created) {
