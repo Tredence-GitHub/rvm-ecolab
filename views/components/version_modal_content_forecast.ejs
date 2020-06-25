@@ -3,19 +3,19 @@
 
 <div class="form-row type-2">
   <div class="col-12 period-type">
-  <b>Forecast View </b>
+  <b>Forecasts View </b>
 </div>
   <div class="form-group col-md-4">
   <label for="inputEmail4">Prior Tonnage Type</label>
-   <select id="forcastPriorTonnageType" class="form-control">
+   <select id="forecastPriorTonnageType" class="form-control">
     <option selected>Choose...</option>
     <option value='actual'>Actual</option>
-    <option value='forcasts'>Forcasts</option>
+    <option value='forecasts'>Forecasts</option>
   </select>
 </div>
 <div class="form-group col-md-4">
   <label for="inputEmail4">Prior Tonnage</label>
-   <select id="forcastPriorTonnage" class="form-control">
+   <select id="forecastPriorTonnage" class="form-control">
        <option selected value=''>Choose...</option>
        <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
   </select>
@@ -23,7 +23,7 @@
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Prior Cost Version</label>
-   <select id="forcastPriorCostVersion" class="form-control">
+   <select id="forecastPriorCostVersion" class="form-control">
        <option selected value=''>Choose...</option>
        <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
   </select>
@@ -31,13 +31,13 @@
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Current Tonnage Type</label>
-  <select id="forcastCurrentTonnageType" class="form-control">
-   <option value='forcasts' selected>Forcasts</option>
+  <select id="forecastCurrentTonnageType" class="form-control">
+   <option value='forecasts' selected>Forecasts</option>
  </select>
 </div>
 <div class="form-group col-md-4">
   <label for="inputEmail4">Current Tonnage</label>
-   <select id="forcastCurrentTonnage" class="form-control">
+   <select id="forecastCurrentTonnage" class="form-control">
       <option selected value=''>Choose...</option>
       <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
   </select>
@@ -45,7 +45,7 @@
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Current Cost Version</label>
-   <select id="forcastCurrentCostVersion" class="form-control">
+   <select id="forecastCurrentCostVersion" class="form-control">
   <option selected value=''>Choose...</option>
     <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
   </select>

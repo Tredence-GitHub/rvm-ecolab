@@ -104,14 +104,14 @@ router.get('/getDropDownValues',function (req,res,next){
 
 
 
-      console.log("pre",preDropDownValuesForYTD,"\npost",postDropDownValuesForYTD,"\nmom",dropDownValuesForMoM,"\nqoq",dropDownValuesForQoQ,"pre cost",preDropDownValuesForCost,"\npost cost",postDropDownValuesForCost);
+      // console.log("pre",preDropDownValuesForYTD,"\npost",postDropDownValuesForYTD,"\nmom",dropDownValuesForMoM,"\nqoq",dropDownValuesForQoQ,"pre cost",preDropDownValuesForCost,"\npost cost",postDropDownValuesForCost);
       successObj.responseData = finalData
       successObj.responseDesc = 'collected dropdown values'
       if(req.query.viewType==='standard'){
         res.render('components/version_modal_content_standard', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
-      else if(req.query.viewType==='forcast'){
-        res.render('components/version_modal_content_forcast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
+      else if(req.query.viewType==='forecasts'){
+        res.render('components/version_modal_content_forecast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
     })
   } catch (error) {
@@ -125,9 +125,15 @@ router.get('/getDropDownValues',function (req,res,next){
 router.post('/saveVersionInfo', (req, res) =>{
   try {
     let versionInfo = req.body
-    let versionName = `${versionInfo.viewName}-${versionInfo.viewType}`
+    // console.log("versionInfo",versionInfo);
+    let versionName = ''
+    if (versionInfo.selectedView === 'standard') {
+      versionName = `${versionInfo.viewType} - ${versionInfo.priorTonPeriodStd} vs ${versionInfo.curTonPeriodStd} | ${versionInfo.priorCostEstStd} vs ${versionInfo.curCostEstStd}`
+    } else {
+      versionName = `${versionInfo.priorTonTypeForecast} vs ${versionInfo.curTonTypeForecast}  - ${versionInfo.priorTonPeriodForecast} vs ${versionInfo.curTonPeriodForecast} | ${versionInfo.priorCostEstForecast} vs ${versionInfo.curCostEstForecast}`
+    }
     db.version.findOrCreate({
-      where : {versionName : versionName},
+      where : {versionName : versionName, viewName: versionInfo.viewName},
       defaults : versionInfo
     }).spread((versionData, created) =>{
       if (created) {
@@ -151,8 +157,10 @@ router.post('/saveVersionInfo', (req, res) =>{
 router.get('/getVersionInfo', (req,res) =>{
   try {
     let sectionType = req.query.sectionType
+    
     db.version.findAll({
-      where: {viewName : sectionType}
+      where: {viewName : sectionType},
+      order: [['requestedDate','desc']]
     }).then(viewData =>{
       successObj.responseData = viewData
       successObj.responseDesc = `Version Data is successfully collected for view - ${sectionType}`

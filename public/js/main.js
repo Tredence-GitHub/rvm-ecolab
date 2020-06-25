@@ -325,7 +325,7 @@ $(document).ready(function() {
     $(document).on('change', '#timeframesType, #view', function(e){
       let timeframesType = $('#timeframesType').val();
       let view = $('#view').val()
-      if(view ==='forcast'){
+      if(view ==='forecast'){
         $('#timeframesType').attr('disabled', 'disabled');
         timeframesType = 'YTD'
         $('#timeframesType').val('YTD')
