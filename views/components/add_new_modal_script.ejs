@@ -164,16 +164,41 @@
         if(forecastPriorTonnageType==='actual'){
             let currentYear = defaultDropdownValues.postDropDownValues[0]
             currentYear = (parseInt(currentYear.split('_')[0])-1)
+            $('#forecastCurrentTonnage').removeAttr("disabled");
+            $('#forecastCurrentCostVersion').removeAttr("disabled");
             $("#forecastPriorTonnage option").remove();
             $("#forecastPriorCostVersion option").remove();
             $("#forecastPriorTonnage").append('<option value='+currentYear+'>'+currentYear+'</option>');
             $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>')
+
         }
         else{
           $("#forecastPriorTonnage option").remove();
           $("#forecastPriorCostVersion option").remove();
+          $('#forecastCurrentTonnage').removeAttr("disabled");
+          $('#forecastCurrentCostVersion').removeAttr("disabled");
+          $('#forecastPriorCostVersion').removeAttr("disabled");
+          $("#forecastPriorTonnage").append('<option selected="">Choose...</option>');
+          $("#forecastPriorCostVersion").append('<option selected="">Choose...</option>');
           $("#forecastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
           $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>')
         }
+    })
+
+    // function to hancdle forcast prior and current tonnage change  events
+    $(document).on('change', '#forecastCurrentTonnage', function(e){
+        let forecastCurrentTonnage = $('#forecastCurrentTonnage').val()
+        let forecastPriorTonnageType = $('#forecastPriorTonnageType').val();
+        if(forecastPriorTonnageType==='forecasts'){
+            $('#forecastPriorTonnage option').remove();
+            $('#forecastPriorTonnage').removeAttr("disabled");
+            $("#forecastPriorTonnage").append('<option selected="">Choose...</option>');
+            $('#forecastPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.postDropDownValues, forecastCurrentTonnage));
+        }
+    })
+    $(document).on('click', '.close', function(){
+      $("#view").val("");
+      $("#timeframesType").val("");
+      $('#newRequestFormModalContent').html('')
     })
  </script>

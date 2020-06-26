@@ -15,7 +15,7 @@
 </div>
 <div class="form-group col-md-4">
   <label for="inputEmail4">Prior Tonnage</label>
-   <select id="forecastPriorTonnage" class="form-control">
+   <select id="forecastPriorTonnage" class="form-control" disabled>
        <option selected value=''>Choose...</option>
        <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
   </select>
@@ -23,7 +23,7 @@
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Prior Cost Version</label>
-   <select id="forecastPriorCostVersion" class="form-control">
+   <select id="forecastPriorCostVersion" class="form-control" disabled>
        <option selected value=''>Choose...</option>
        <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
   </select>
@@ -31,13 +31,13 @@
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Current Tonnage Type</label>
-  <select id="forecastCurrentTonnageType" class="form-control">
+  <select id="forecastCurrentTonnageType" class="form-control" >
    <option value='forecasts' selected>Forecasts</option>
  </select>
 </div>
 <div class="form-group col-md-4">
   <label for="inputEmail4">Current Tonnage</label>
-   <select id="forecastCurrentTonnage" class="form-control">
+   <select id="forecastCurrentTonnage" class="form-control" disabled>
       <option selected value=''>Choose...</option>
       <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
   </select>
@@ -45,11 +45,15 @@
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Current Cost Version</label>
-   <select id="forecastCurrentCostVersion" class="form-control">
+   <select id="forecastCurrentCostVersion" class="form-control" disabled>
   <option selected value=''>Choose...</option>
     <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
   </select>
 </div>
 
+</div>
+<div class="modal-footer px-0">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary" id="continueToSave">Continue</button>
 </div>
 <% include ./add_new_modal_script %>
