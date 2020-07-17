@@ -55,8 +55,12 @@
     </table>
             </div>
           </div>
-          <div class="txt-title viewLinkBox"><a href="">View Report on PowerBI ></a></div>
-         
+          <% if(viewType === 'Division') { %>
+            <div class="txt-title viewLinkBox"><a href="https://app.powerbi.com/groups/c813f333-e9d3-4fb5-a3e1-e8dd3c398806/reports/06332765-e61f-4438-af7a-4e162f2e5013/ReportSectionca4b44ca4d33dd6762a2?noSignUpCheck=1" target="_blank">View Report on PowerBI ></a></div>
+          <%} else { %>
+            <div class="txt-title viewLinkBox"><a href="https://app.powerbi.com/groups/c813f333-e9d3-4fb5-a3e1-e8dd3c398806/reports/6f2ae55f-a2b2-4cc2-a143-242aaa53b8fe/ReportSection4db80ba019455c884100" target="_blank">View Report on PowerBI ></a></div>
+          <% } %>
+
         </div>
 </div>
 </section>
