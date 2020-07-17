@@ -41,8 +41,8 @@
               formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
               formData["userEmail"]              =  'user@test.com';
               formData["requestedDate"]          =  now;
-              formData["expiryDate"]              = expiryDate;
-              formData["refreshEta"]              =  '4 Hours';
+              formData["expiryDate"]              = '-';
+              formData["refreshEta"]              =  expiryDate;
               formData["status"]              =  'Pending';
            }
            else{
@@ -56,8 +56,8 @@
              formData["curCostEstForecast"]     = $('#forecastCurrentCostVersion').val();
              formData["userEmail"]              =  'user@test.com';
              formData["requestedDate"]          =  now;
-             formData["expiryDate"]              =  expiryDate;
-             formData["refreshEta"]              =  '4 Hours';
+             formData["expiryDate"]              =  '-';
+             formData["refreshEta"]              =  expiryDate;
              formData["status"]              =  'Pending';
            }
            formData["selectedView"] = $('#view').val()

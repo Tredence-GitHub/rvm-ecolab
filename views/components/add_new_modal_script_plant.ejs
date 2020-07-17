@@ -15,7 +15,7 @@
       var now = new Date();
       now = now.toLocaleString()
       let expiryDate = new Date().addHours(4)
-      expiryDate = expiryDate.toLocaleString()  
+      expiryDate = expiryDate.toLocaleString()
       var formData = {};
           if($('#view').val()==='standard'){
               formData["viewName"]               =  $('#viewType').val();
@@ -31,8 +31,8 @@
 
               formData["userEmail"]              =  'user@test.com';
               formData["requestedDate"]          =  now;
-              formData["expiryDate"]              =  expiryDate;
-              formData["refreshEta"]              =  '4 Hours';
+              formData["expiryDate"]              =  '-';
+              formData["refreshEta"]              =  expiryDate;
               formData["status"]              =  'Pending';
            }
            else{
@@ -49,8 +49,8 @@
 
              formData["userEmail"]              =  'user@test.com';
              formData["requestedDate"]          =  now;
-             formData["expiryDate"]              =  expiryDate;
-             formData["refreshEta"]              =  '4 Hours';
+             formData["expiryDate"]              =  '-';
+             formData["refreshEta"]              =  expiryDate;
              formData["status"]              =  'Pending';
            }
            formData["selectedView"] = $('#view').val()
