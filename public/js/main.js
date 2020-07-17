@@ -325,6 +325,7 @@ $(document).ready(function() {
     $(document).on('change', '#timeframesType, #view', function(e){
       let timeframesType = $('#timeframesType').val();
       let view = $('#view').val()
+      let rvmType = $('#viewType').val();
       if(view ==='forecast'){
         $('#timeframesType').attr('disabled', 'disabled');
         timeframesType = 'YTD'
@@ -339,7 +340,7 @@ $(document).ready(function() {
                 dataType: 'html',
                 type: 'get',
                 contentType: 'application/html',
-                data:{timeframesType:timeframesType, viewType:view},
+                data:{timeframesType:timeframesType, viewType:view, rvmType:rvmType},
                 success: function( data){
                     console.log("aa",data)
                     $('#newRequestFormModalContent').html( data  );

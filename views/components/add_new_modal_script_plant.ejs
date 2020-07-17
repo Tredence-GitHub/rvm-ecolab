@@ -1,0 +1,122 @@
+<%
+
+%>
+ <script>
+    var defaultDropdownValues = <%- JSON.stringify(defaultDropdownValues)  %>
+
+
+
+    Date.prototype.addHours= function(h){
+        this.setHours(this.getHours()+h);
+        return this;
+    }
+
+    $(document).on('click', '#continueToSave', function(e){
+      var now = new Date();
+      now = now.toLocaleString()
+      let expiryDate = new Date().addHours(4)
+      expiryDate = expiryDate.toLocaleString()  
+      var formData = {};
+          if($('#view').val()==='standard'){
+              formData["viewName"]               =  $('#viewType').val();
+              formData["viewType"]               =  $('#timeframesType').val();
+
+              formData["priorTonTypeStd"]          =  $("#stdPriorTonnageType").val();
+              formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
+              formData["priorCostEstStd"]        =  $("#stdPriorCostVersion").val();
+
+              formData["priorTonTypeStd"]          =  $("#stdCurrentTonnageType").val();
+              formData["curTonPeriodStd"]        =  $("#stdCurrentTonnage").val();
+              formData["curCostEstStd"]          =  $("#stdCurrentCostVersion").val();
+
+              formData["userEmail"]              =  'user@test.com';
+              formData["requestedDate"]          =  now;
+              formData["expiryDate"]              =  expiryDate;
+              formData["refreshEta"]              =  '4 Hours';
+              formData["status"]              =  'Pending';
+           }
+           else{
+             formData["viewName"]               =  $('#viewType').val();
+             formData["viewType"]               =  $('#timeframesType').val();
+
+             formData["priorTonTypeForecast"]   =  $("#forecastPriorTonnageType").val();
+             formData["priorTonPeriodForecast"]    =  $("#forecastPriorTonnage").val();
+             formData["priorCostEstForecast"]        =  $("#forecastPriorCostVersion").val();
+
+             formData["curTonTypeForecast"]      =  $('#forecastCurrentTonnageType').val();
+             formData["curTonPeriodForecast"]     = $('#forecastCurrentTonnage').val();
+             formData["curCostEstForecast"]     = $('#forecastCurrentCostVersion').val();
+
+             formData["userEmail"]              =  'user@test.com';
+             formData["requestedDate"]          =  now;
+             formData["expiryDate"]              =  expiryDate;
+             formData["refreshEta"]              =  '4 Hours';
+             formData["status"]              =  'Pending';
+           }
+           formData["selectedView"] = $('#view').val()
+
+          swal({
+            title: "Are you sure?",
+            text: "You are about to request for a new custom version!",
+            icon: "warning",
+              dangerMode: true,
+               buttons: {
+                 cancel: {
+                    text: "Cancel",
+                    value: false,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                  },
+                  confirm: {
+                    text: "Continue",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: false
+                  }
+               },
+             })
+             .then(name => {
+               if (!name) throw null;
+               $.ajax({
+                   url: '/api/saveVersionInfo',
+                   type: 'post',
+                   contentType: 'application/json',
+                   data:JSON.stringify(formData),
+                   success: function( data){
+                       console.log("bb",data)
+
+                      if(data.responseType=='success'){
+                        swal("New request created successfully!", {
+                              icon: "success",
+                            }).then(function(){
+                              $('#staticBackdrop').modal('hide');
+                              location.reload();
+                            });
+                      }
+                      else{
+                        swal(data.responseDesc, {
+                              icon: "error",
+                            });
+
+                      }
+
+                   },
+                   error: function(error){
+                     swal('Unknown error occured!', {
+                           icon: "error",
+                      });
+                   }
+               });
+             })
+    })
+
+
+
+    $(document).on('click', '.close', function(){
+      $("#view").val("");
+      $("#timeframesType").val("");
+      $('#newRequestFormModalContent').html('<div style="padding:20px;padding-left:32px; padding-right:32px;"> <div class="txt-title">Note - </div><p class="txt">Only 1 version will be accepted per user per day</p><p class="txt">Requests for already existing default and custom versions will not be processed</p></div>')
+    })
+ </script>

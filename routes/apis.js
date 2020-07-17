@@ -107,11 +107,17 @@ router.get('/getDropDownValues',function (req,res,next){
       // console.log("pre",preDropDownValuesForYTD,"\npost",postDropDownValuesForYTD,"\nmom",dropDownValuesForMoM,"\nqoq",dropDownValuesForQoQ,"pre cost",preDropDownValuesForCost,"\npost cost",postDropDownValuesForCost);
       successObj.responseData = finalData
       successObj.responseDesc = 'collected dropdown values'
-      if(req.query.viewType==='standard'){
+      if(req.query.viewType==='standard' && req.query.rvmType==='Division'){
         res.render('components/version_modal_content_standard', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
-      else if(req.query.viewType==='forecast'){
+      else if(req.query.viewType==='forecast' && req.query.rvmType==='Division'){
         res.render('components/version_modal_content_forecast', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
+      }
+      else if(req.query.viewType==='standard' && req.query.rvmType==='Plant'){
+        res.render('components/version_modal_content_standard_plant', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
+      }
+      else if(req.query.viewType==='forecast' && req.query.rvmType==='Plant'){
+        res.render('components/version_modal_content_forecast_plant', {defaultDropdownValues:successObj.responseData, timeframesType:req.query.timeframesType, viewType:req.query.viewType})
       }
     })
   } catch (error) {
