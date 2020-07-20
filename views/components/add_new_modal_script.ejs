@@ -29,7 +29,26 @@
 
 
     })
+    function validateUserInputs(){
+      var isValid = true;
+      $("#newRequestForm select").each(function() {
+              if( $(this).val()==='' ) {
+                     $(this).addClass('warning');
+                     isValid = false;
+               }
+               else{
+                 $(this).removeClass('warning')
+               }
 
+      })
+      return isValid;
+      }
+
+   $(document).on('change', '#newRequestForm select', function(e){
+        if( $(this).val()!=='' ){
+          $(this).removeClass('warning')
+        }
+   })
     $(document).on('click', '#continueToSave', function(e){
       var now = new Date();
       now = now.toLocaleString()
@@ -54,74 +73,75 @@
              formData["viewName"]               =  $('#viewType').val();
              formData["viewType"]               =  $('#timeframesType').val();
              formData["priorTonTypeForecast"]   =  $("#forecastPriorTonnageType").val();
-             formData["priorTonPeriodForecast"]    =  $("#forecastPriorTonnage").val();
-             formData["priorCostEstForecast"]        =  $("#forecastPriorCostVersion").val();
-             formData["curTonTypeForecast"]      =  $('#forecastCurrentTonnageType').val();
-             formData["curTonPeriodForecast"]     = $('#forecastCurrentTonnage').val();
+             formData["priorTonPeriodForecast"] =  $("#forecastPriorTonnage").val();
+             formData["priorCostEstForecast"]   =  $("#forecastPriorCostVersion").val();
+             formData["curTonTypeForecast"]     =  $('#forecastCurrentTonnageType').val();
+             formData["curTonPeriodForecast"]   = $('#forecastCurrentTonnage').val();
              formData["curCostEstForecast"]     = $('#forecastCurrentCostVersion').val();
              formData["userEmail"]              =  'user@test.com';
              formData["requestedDate"]          =  now;
-             formData["expiryDate"]              =  '-';
-             formData["refreshEta"]              =  expiryDate;
-             formData["status"]              =  'Pending';
+             formData["expiryDate"]             =  '-';
+             formData["refreshEta"]             =  expiryDate;
+             formData["status"]                 =  'Pending';
            }
            formData["selectedView"] = $('#view').val()
-
-          swal({
-            title: "Are you sure?",
-            text: "You are about to request for a new custom version!",
-            icon: "warning",
-              dangerMode: true,
-               buttons: {
-                 cancel: {
-                    text: "Cancel",
-                    value: false,
-                    visible: true,
-                    className: "",
-                    closeModal: true,
-                  },
-                  confirm: {
-                    text: "Continue",
-                    value: true,
-                    visible: true,
-                    className: "",
-                    closeModal: false
-                  }
-               },
-             })
-             .then(name => {
-               if (!name) throw null;
-               $.ajax({
-                   url: '/api/saveVersionInfo',
-                   type: 'post',
-                   contentType: 'application/json',
-                   data:JSON.stringify(formData),
-                   success: function( data){
-                       console.log("bb",data)
-
-                      if(data.responseType=='success'){
-                        swal("New request created successfully!", {
-                              icon: "success",
-                            }).then(function(){
-                              $('#staticBackdrop').modal('hide');
-                              location.reload();
-                            });
+           if(validateUserInputs()){
+              swal({
+                title: "Are you sure?",
+                text: "You are about to request for a new custom version!",
+                icon: "warning",
+                  dangerMode: true,
+                   buttons: {
+                     cancel: {
+                        text: "Cancel",
+                        value: false,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                      },
+                      confirm: {
+                        text: "Continue",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: false
                       }
-                      else{
-                        swal(data.responseDesc, {
-                              icon: "error",
-                            });
-
-                      }
-
                    },
-                   error: function(error){
-                     swal('Unknown error occured!', {
-                           icon: "error",
-                      });
-                   }
-               });
-             })
+                 })
+                 .then(name => {
+                   if (!name) throw null;
+                   $.ajax({
+                       url: '/api/saveVersionInfo',
+                       type: 'post',
+                       contentType: 'application/json',
+                       data:JSON.stringify(formData),
+                       success: function( data){
+                           console.log("bb",data)
+
+                          if(data.responseType=='success'){
+                            swal("New request created successfully!", {
+                                  icon: "success",
+                                }).then(function(){
+                                  $('#staticBackdrop').modal('hide');
+                                  location.reload();
+                                });
+                          }
+                          else{
+                            swal(data.responseDesc, {
+                                  icon: "error",
+                                });
+
+                          }
+
+                       },
+                       error: function(error){
+                         swal('Unknown error occured!', {
+                               icon: "error",
+                          });
+                       }
+                   });
+                 })
+            }
     })
 
 
@@ -155,6 +175,7 @@
         $('#stdPriorTonnage').removeAttr("disabled");
         $('#stdPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.preDropDownValues, stdCurrentTonnage));
       }
+      validateUserInputs()
     })
 
     $(document).on('change', '#stdCurrentCostVersion', function(e){
@@ -165,6 +186,7 @@
       let stdCurrentCostVersion = stdCurrentCostVersionYear+'_P12_StandardCost';
       console.log("stdPriorCostVersion -- ", stdCurrentCostVersion)
       $('#stdPriorCostVersion').val(stdCurrentCostVersion)
+      validateUserInputs()
     })
     //View - Division - forecasts
     $(document).on('change', '#forecastPriorTonnageType', function(e){
@@ -190,7 +212,9 @@
           $("#forecastPriorCostVersion").append('<option selected="">Choose...</option>');
           $("#forecastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
           $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>')
+
         }
+          validateUserInputs()
     })
 
     // function to hancdle forcast prior and current tonnage change  events
@@ -202,11 +226,13 @@
             $('#forecastPriorTonnage').removeAttr("disabled");
             $("#forecastPriorTonnage").append('<option selected="">Choose...</option>');
             $('#forecastPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.postDropDownValues, forecastCurrentTonnage));
+            validateUserInputs()
         }
     })
     $(document).on('click', '.close', function(){
       $("#view").val("");
       $("#timeframesType").val("");
       $('#newRequestFormModalContent').html('<div style="padding:20px;padding-left:32px; padding-right:32px;"> <div class="txt-title">Note - </div><p class="txt">Only 1 version will be accepted per user per day</p><p class="txt">Requests for already existing default and custom versions will not be processed</p></div>')
+
     })
  </script>

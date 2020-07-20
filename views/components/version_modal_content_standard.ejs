@@ -6,7 +6,7 @@
   <div class="form-group col-md-6">
     <label for="stdPriorTonnage">Prior Tonnage</label>
     <select id="stdPriorTonnage" disabled class="form-control std" data-source-set='' data-target-item='stdCurrentTonnage'  <%- isItemEnabled(timeframesType, 'stdPriorTonnage') %> data-timeframetype=<%= timeframesType %>>
-        <option selected>Choose...</option>
+        <option selected value=''>Choose...</option>
         <%- rederOptions(defaultDropdownValues.preDropDownValues) %>
     </select>
   </div>
@@ -14,7 +14,7 @@
 <div class="form-group col-md-6">
   <label for="inputEmail4">Prior Cost Version</label>
    <select id="stdPriorCostVersion" class="form-control std" data-source-set='' data-target-item='stdCurrentCostVersion'  <%- isItemEnabled(timeframesType, 'stdPriorCostVersion') %> data-timeframetype=<%= timeframesType %> >
-  <option selected>Choose...</option>
+  <option selected value=''>Choose...</option>
   <%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>
   <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
   </select>
@@ -22,14 +22,14 @@
 <div class="form-group col-md-6">
 <label for="inputEmail4">Current Tonnage</label>
  <select id="stdCurrentTonnage" class="form-control std" data-source-set='' data-target-item='stdPriorTonnage' data-timeframetype=<%= timeframesType %>>
-    <option selected>Choose...</option>
+    <option selected value=''>Choose...</option>
     <%- rederOptionsByCondition(defaultDropdownValues.postDropDownValues, timeframesType) %>
     </select>
   </div>
   <div class="form-group col-md-6">
     <label for="inputEmail4">Current Cost Version</label>
      <select id="stdCurrentCostVersion" class="form-control std" data-source-set='' data-target-item='stdPriorCostVersion' data-timeframetype=<%= timeframesType %>>
-    <option selected>Choose...</option>
+    <option selected value=''>Choose...</option>
     <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
     </select>
   </div>`

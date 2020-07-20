@@ -4,11 +4,26 @@
  <script>
     var defaultDropdownValues = <%- JSON.stringify(defaultDropdownValues)  %>
 
-   function validateUserInputs(){
-    $("form").each(function(){
-       $(this).find(':input') //<-- Should return all input elements in that specific form.
-   });
- }
+    function validateUserInputs(){
+      var isValid = true;
+      $("#newRequestForm select").each(function() {
+              if( $(this).val()==='' ) {
+                     $(this).addClass('warning');
+                     isValid = false;
+               }
+               else{
+                 $(this).removeClass('warning')
+               }
+
+      })
+      return isValid;
+      }
+
+   $(document).on('change', '#newRequestForm select', function(e){
+        if( $(this).val()!=='' ){
+          $(this).removeClass('warning')
+        }
+   })
     $(document).on('click', '#continueToSave', function(e){
       var now = new Date();
       now = now.toLocaleString()
@@ -53,7 +68,7 @@
              formData["status"]              =  'Pending';
            }
            formData["selectedView"] = $('#view').val()
-          validateUserInputs();
+          if(validateUserInputs()){
           swal({
             title: "Are you sure?",
             text: "You are about to request for a new custom version!",
@@ -109,6 +124,7 @@
                    }
                });
              })
+           }
     })
 
 
