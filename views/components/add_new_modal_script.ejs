@@ -29,7 +29,8 @@
     $(document).on('click', '#continueToSave', function(e){
       var now = new Date();
       now = now.toLocaleString()
-      let expiryDate = new Date().addHours(4)
+      let expiryDate = new Date()
+      expiryDate = expiryDate.setHours(expiryDate.getHours() + 4);
       expiryDate = expiryDate.toLocaleString()
       var formData = {};
           if($('#view').val()==='standard'){

@@ -4,17 +4,16 @@
  <script>
     var defaultDropdownValues = <%- JSON.stringify(defaultDropdownValues)  %>
 
-
-
-    Date.prototype.addHours= function(h){
-        this.setHours(this.getHours()+h);
-        return this;
-    }
-
+   function validateUserInputs(){
+    $("form").each(function(){
+       $(this).find(':input') //<-- Should return all input elements in that specific form.
+   });
+ }
     $(document).on('click', '#continueToSave', function(e){
       var now = new Date();
       now = now.toLocaleString()
-      let expiryDate = new Date().addHours(4)
+      let expiryDate = new Date()
+      expiryDate = expiryDate.setHours(expiryDate.getHours() + 4);
       expiryDate = expiryDate.toLocaleString()
       var formData = {};
           if($('#view').val()==='standard'){
@@ -54,7 +53,7 @@
              formData["status"]              =  'Pending';
            }
            formData["selectedView"] = $('#view').val()
-
+          validateUserInputs();
           swal({
             title: "Are you sure?",
             text: "You are about to request for a new custom version!",
