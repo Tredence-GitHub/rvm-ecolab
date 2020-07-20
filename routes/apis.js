@@ -37,6 +37,7 @@ router.get('/getDropDownValues',function (req,res,next){
     let sqlQueryForYTDandMoM = `SELECT * FROM Standard_vw`
     let sqlQueryForQoQ = `SELECT * FROM Quarters`
     let sqlQueryForCost = `SELECT * FROM cost`
+    let sqlQueryForForecast = `SELECT * FROM forecast_vw where view_name = '${req.query.rvmType}'`
     Promise.all([
             db.sequelize.query(
               sqlQueryForYTDandMoM,
@@ -49,8 +50,12 @@ router.get('/getDropDownValues',function (req,res,next){
             db.sequelize.query(
               sqlQueryForCost,
                   { type: db.sequelize.QueryTypes.SELECT }
+              ),
+            db.sequelize.query(
+              sqlQueryForForecast,
+                  { type: db.sequelize.QueryTypes.SELECT }
               )
-    ]).then(([resultForYTDandMoM, resultForQoQ,resultForCost]) => {
+    ]).then(([resultForYTDandMoM, resultForQoQ,resultForCost,resultForForecast]) => {
       // console.log("allResults",resultForYTDandMoM,resultForQoQ);
       let preDropDownValuesForYTD =[],
           postDropDownValuesForYTD =[],
@@ -58,6 +63,7 @@ router.get('/getDropDownValues',function (req,res,next){
           dropDownValuesForQoQ =[],
           preDropDownValuesForCost = [],
           postDropDownValuesForCost = [];
+          dropDownValuesForForecast = [];
 
 
 
@@ -85,22 +91,28 @@ router.get('/getDropDownValues',function (req,res,next){
         preDropDownValuesForCost:preDropDownValuesForCost,
         postDropDownValuesForCost:postDropDownValuesForCost
       }
+      if (req.query.viewType==='standard') {
+        if (selectedType === 'YTD') {
+            finalData.preDropDownValues = preDropDownValuesForYTD
+            finalData.postDropDownValues = postDropDownValuesForYTD
 
-      if (selectedType === 'YTD') {
-          finalData.preDropDownValues = preDropDownValuesForYTD
-          finalData.postDropDownValues = postDropDownValuesForYTD
+        }
+        if (selectedType === 'MoM') {
+            finalData.preDropDownValues = dropDownValuesForMoM
+            finalData.postDropDownValues = dropDownValuesForMoM
 
+        }
+        if (selectedType === 'QoQ') {
+            finalData.preDropDownValues = dropDownValuesForQoQ
+            finalData.postDropDownValues = dropDownValuesForQoQ
+
+        }
+      } else {
+        resultForForecast.map( item => dropDownValuesForForecast.push(item.forecast_snapshot_name))
+        finalData.preDropDownValues = dropDownValuesForForecast
+        finalData.postDropDownValues = dropDownValuesForForecast
       }
-      if (selectedType === 'MoM') {
-          finalData.preDropDownValues = dropDownValuesForMoM
-          finalData.postDropDownValues = dropDownValuesForMoM
 
-      }
-      if (selectedType === 'QoQ') {
-          finalData.preDropDownValues = dropDownValuesForQoQ
-          finalData.postDropDownValues = dropDownValuesForQoQ
-
-      }
 
 
 
