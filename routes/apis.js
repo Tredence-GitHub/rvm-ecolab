@@ -34,9 +34,9 @@ router.get('/getDropDownValues',function (req,res,next){
     //all info of request will be in req
     // info which you return will in res
 
-    let sqlQueryForYTDandMoM = `SELECT * FROM Standard_vw`
-    let sqlQueryForQoQ = `SELECT * FROM Quarters`
-    let sqlQueryForCost = `SELECT * FROM cost`
+    let sqlQueryForYTDandMoM = `SELECT * FROM Standard_vw where view_name = '${req.query.rvmType}'`
+    let sqlQueryForQoQ = `SELECT * FROM Quarters where view_name = '${req.query.rvmType}'`
+    let sqlQueryForCost = `SELECT * FROM cost where view_name = '${req.query.rvmType}'`
     let sqlQueryForForecast = `SELECT * FROM forecast_vw where view_name = '${req.query.rvmType}'`
     Promise.all([
             db.sequelize.query(
@@ -68,49 +68,49 @@ router.get('/getDropDownValues',function (req,res,next){
 
 
       resultForYTDandMoM.map(item => {
-        if(item.Period_flag == 'Pre'){preDropDownValuesForYTD.push(item.Tonnage_period)}
-        if(item.Period_flag == 'Post'){postDropDownValuesForYTD.push(item.Tonnage_period)}
-        dropDownValuesForMoM.push(item.Tonnage_period)
+        if(item.period_flag == 'Pre'){preDropDownValuesForYTD.push(item.tonnage_period)}
+        if(item.period_flag == 'Post'){postDropDownValuesForYTD.push(item.tonnage_period)}
+        dropDownValuesForMoM.push(item.tonnage_period)
       })
 
 
 
-      resultForQoQ.map(item => dropDownValuesForQoQ.push(item.Tonnage_period))
+      resultForQoQ.map(item => dropDownValuesForQoQ.push(item.fiscal_quarter))
 
 
 
       resultForCost.map(item => {
-        if(item.Period_flag == 'Pre'){preDropDownValuesForCost.push(item.Tonnage_period)}
-        if(item.Period_flag == 'Post'){postDropDownValuesForCost.push(item.Tonnage_period)}
+        preDropDownValuesForCost.push(item.cost_period)
+        postDropDownValuesForCost.push(item.cost_period)
       })
 
 
 
       let selectedType = req.query.timeframesType
       let finalData = {
-        preDropDownValuesForCost:preDropDownValuesForCost,
-        postDropDownValuesForCost:postDropDownValuesForCost
+        preDropDownValuesForCost:preDropDownValuesForCost.sort(),
+        postDropDownValuesForCost:postDropDownValuesForCost.sort()
       }
       if (req.query.viewType==='standard') {
         if (selectedType === 'YTD') {
-            finalData.preDropDownValues = preDropDownValuesForYTD
-            finalData.postDropDownValues = postDropDownValuesForYTD
+            finalData.preDropDownValues = preDropDownValuesForYTD.sort()
+            finalData.postDropDownValues = postDropDownValuesForYTD.sort()
 
         }
         if (selectedType === 'MoM') {
-            finalData.preDropDownValues = dropDownValuesForMoM
-            finalData.postDropDownValues = dropDownValuesForMoM
+            finalData.preDropDownValues = dropDownValuesForMoM.sort()
+            finalData.postDropDownValues = dropDownValuesForMoM.sort()
 
         }
         if (selectedType === 'QoQ') {
-            finalData.preDropDownValues = dropDownValuesForQoQ
-            finalData.postDropDownValues = dropDownValuesForQoQ
+            finalData.preDropDownValues = dropDownValuesForQoQ.sort()
+            finalData.postDropDownValues = dropDownValuesForQoQ.sort()
 
         }
       } else {
         resultForForecast.map( item => dropDownValuesForForecast.push(item.forecast_snapshot_name))
-        finalData.preDropDownValues = dropDownValuesForForecast
-        finalData.postDropDownValues = dropDownValuesForForecast
+        finalData.preDropDownValues = dropDownValuesForForecast.sort()
+        finalData.postDropDownValues = dropDownValuesForForecast.sort()
       }
 
 
