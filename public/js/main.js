@@ -351,7 +351,7 @@ $(document).ready(function() {
             });
           }
           else{
-            $("#view").val("");
+            //$("#view").val("");
             $("#timeframesType").val("");
             $('#newRequestFormModalContent').html('<div style="padding:20px;padding-left:32px; padding-right:32px;"> <div class="txt-title">Note - </div><p class="txt">Only 1 version will be accepted per user per day</p><p class="txt">Requests for already existing default and custom versions will not be processed</p></div>')
           }

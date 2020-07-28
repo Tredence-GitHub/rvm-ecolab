@@ -29,7 +29,9 @@
       now = now.toLocaleString()
       let expiryDate = new Date()
       expiryDate = expiryDate.setHours(expiryDate.getHours() + 4);
+      expiryDate = new Date(expiryDate)
       expiryDate = expiryDate.toLocaleString()
+
       var formData = {};
           if($('#view').val()==='standard'){
               formData["viewName"]               =  $('#viewType').val();
