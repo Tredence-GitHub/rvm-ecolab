@@ -4,22 +4,6 @@
     Author:Manoj Choudhary
 -----------------------------------------------------------------------------------
 
-    CSS INDEX
-    ===================
-
-    01.COMMON
-    02.HEADER
-    03.BRAND
-    04.SERVICES
-    05.ABOUT
-    06.VIDEO COUNTER
-    07.TEAM
-    08.TESTIMONIAL
-    09.BLOG
-    10.SUBSCRIBE
-    11.FOOTER
-
------------------------------------------------------------------------------------*/
 /*===========================
      01.COMMON css
 ===========================*/
@@ -1436,17 +1420,21 @@ font-size: 14px;
       max-width: 78px;
   }
   .navbar-nav .nav-item a{
-        font-size: 14px;
+        font-size: 12px;
   }
   .sticky .navbar {
     padding: 4px 0;
 }
 .header-hero-content .header-title{
-      font-size: 14px;
+      font-size: 12px;
 }
+.header-hero {
+    margin-top: 74px;
+}
+
 .world{
   font-size: 14px;
-  padding: 6px;
+  padding: 0px;
   border-radius: 4px;
 }
 .header-hero-content {
@@ -1461,7 +1449,7 @@ p.txt{
   font-size: 12px;
 }
 .tile-title{
-  font-size: 16px;
+  font-size: 12px;
 }
 .tile-para {
     color: #ffffff;
@@ -1511,4 +1499,25 @@ select option:disabled {
 select.warning{
   border-color: #dc3545;
 
+}
+
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td, table.dataTable th {
+    border-bottom-width: 0;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+
+@media(max-width:1600px){
+  table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td, table.dataTable th{
+        font-size: 0.7rem;
+  }
+  div.dataTables_wrapper div.dataTables_info {
+    padding-top: 0.5em;
+    white-space: nowrap;
+    font-size: 0.7em;
+}
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    font-size: 0.7em;
+}
 }

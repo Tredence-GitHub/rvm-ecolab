@@ -28,6 +28,7 @@
           <th class='v-middle' >#</th>
           <th class='v-middle'>Version Name</th>
           <th class='v-middle'>Timeframes Type</th>
+          <th class='v-middle'>View Type</th>
           <th class='v-middle'>Requested By</th>
           <th class='v-middle'>Requested Date</th>
           <th class='v-middle'>Status</th>
@@ -42,6 +43,7 @@
              <td><%= i+1 %></td>
              <td><%= versionData[i].versionName %></td>
              <td><%= versionData[i].viewType %></td>
+             <td><%= versionData[i].viewName %></td>
              <td><%= versionData[i].userEmail %></td>
              <td><%= versionData[i].requestedDate %></td>
              <td class='red'><%= versionData[i].status %></td>

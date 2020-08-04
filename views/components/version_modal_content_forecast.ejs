@@ -17,13 +17,13 @@
   <label for="inputEmail4">Prior Tonnage</label>
    <select id="forecastPriorTonnage" class="form-control" disabled>
        <option selected value=''>Choose...</option>
-       <%- rederOptions(defaultDropdownValues.postDropDownValues) %>
+       <%- rederOptions(defaultDropdownValues.preDropDownValues) %>
   </select>
 </div>
 
 <div class="form-group col-md-4">
   <label for="inputEmail4">Prior Cost Version</label>
-   <select id="forecastPriorCostVersion" class="form-control" disabled>
+   <select id="forecastPriorCostVersion" class="form-control">
        <option selected value=''>Choose...</option>
        <%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>
   </select>

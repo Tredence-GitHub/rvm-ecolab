@@ -129,6 +129,20 @@
            }
     })
 
+    $(document).on('change', '#stdCurrentTonnage', function(e){
+      let timeFrameType = $('#timeframesType').val();
+      let view = $('#view').val();
+      let stdCurrentTonnage = $('#stdCurrentTonnage').val()
+      if(timeFrameType==='YTD' && view === 'standard'){
+        $('#stdPriorTonnage').val(stdCurrentTonnage)
+      }
+      // if(timeFrameType=='MoM' || timeFrameType=='QoQ'){
+      //   $('#stdPriorTonnage option').remove();
+      //   $('#stdPriorTonnage').removeAttr("disabled");
+      //   $('#stdPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.preDropDownValues, stdCurrentTonnage));
+      // }
+
+    })
 
 
     $(document).on('click', '.close', function(){

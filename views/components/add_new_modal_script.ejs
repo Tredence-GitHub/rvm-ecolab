@@ -56,7 +56,7 @@
       expiryDate = expiryDate.setHours(expiryDate.getHours() + 4);
       expiryDate = new Date(expiryDate)
       expiryDate = expiryDate.toLocaleString()
-      console.log("expiryDate", expiryDate)
+
 
       var formData = {};
           if($('#view').val()==='standard'){
@@ -195,16 +195,26 @@
     $(document).on('change', '#forecastPriorTonnageType', function(e){
         let forecastPriorTonnageType  = $('#forecastPriorTonnageType').val();
         if(forecastPriorTonnageType==='actual'){
-            let currentYear = defaultDropdownValues.postDropDownValues[0]
-            currentYear = (parseInt(currentYear.split('_')[0])-1)
+            let currentYear = defaultDropdownValues.preDropDownValues[0]
+            //currentYear = (parseInt(currentYear.split('-')[0]))
+            currentYear = currentYear.split(/([0-9]+)/)
+            //currentYear = currentYear.match(/(\d+)/)
+            //parseInt(currentYear-1)
+
+            let priorTonnageVal = currentYear[0]+(parseInt(currentYear[1])-1)
+            console.log('YEAR--', priorTonnageVal)
+
             $('#forecastCurrentTonnage').removeAttr("disabled");
             $('#forecastCurrentCostVersion').removeAttr("disabled");
             //$("#forecastPriorTonnage option").remove();
             $("#forecastPriorTonnage").removeAttr("disabled");;
+            $("#forecastPriorTonnage option").remove();
+            $("#forecastPriorTonnage").append('<option selected value="'+priorTonnageVal+'">'+priorTonnageVal+'</option>');
+
             $("#forecastPriorCostVersion option").remove();
             //$("#forecastPriorTonnage").append('<option value='+currentYear+'>'+currentYear+'</option>');
             $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>')
-
+            $('#forecastPriorCostVersion').removeAttr("disabled");  
         }
         else{
           $("#forecastPriorTonnage option").remove();
