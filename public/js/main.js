@@ -322,6 +322,15 @@ $(function () {
 
 $(document).ready(function() {
     $('#example').DataTable();
+    $(document).on('change', '#view', function(e){
+      let view = $('#view').val();
+      if(view == 'forecast'){
+        $('#timeframesType option[value="YTD"]').text('Full Year')
+      }
+      else{
+          $('#timeframesType option[value="YTD"]').text('YTD')
+      }
+    })
     $(document).on('change', '#timeframesType, #view', function(e){
       let timeframesType = $('#timeframesType').val();
       let view = $('#view').val()
