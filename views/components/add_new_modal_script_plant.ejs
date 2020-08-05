@@ -143,6 +143,26 @@
       // }
 
     })
+    $(document).on('change', '#forecastPriorTonnageType', function(e){
+      let timeFrameType = $('#timeframesType').val();
+      let view  = $('#view').val();
+      let forecastPriorTonnageType = $('#forecastPriorTonnageType').val();
+      if(forecastPriorTonnageType==='forecasts'){
+        $("#forecastPriorTonnage option").remove();
+        $("#forecastPriorTonnage").append('<option selected="" value="">Choose...</option>');
+        $("#forecastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
+      }
+      else{
+          $("#forecastPriorTonnage option").remove();
+          $("#forecastPriorTonnage").append("<option selected value='2020'>2020</option>");
+      }
+      // if(timeFrameType=='MoM' || timeFrameType=='QoQ'){
+      //   $('#stdPriorTonnage option').remove();
+      //   $('#stdPriorTonnage').removeAttr("disabled");
+      //   $('#stdPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.preDropDownValues, stdCurrentTonnage));
+      // }
+
+    })
 
 
     $(document).on('click', '.close', function(){
