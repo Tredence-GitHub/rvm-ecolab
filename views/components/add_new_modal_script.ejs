@@ -214,7 +214,7 @@
             $("#forecastPriorCostVersion option").remove();
             //$("#forecastPriorTonnage").append('<option value='+currentYear+'>'+currentYear+'</option>');
             $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.preDropDownValuesForCost) %>')
-            $('#forecastPriorCostVersion').removeAttr("disabled");  
+            $('#forecastPriorCostVersion').removeAttr("disabled");
         }
         else{
           $("#forecastPriorTonnage option").remove();
@@ -222,8 +222,8 @@
           $('#forecastCurrentTonnage').removeAttr("disabled");
           $('#forecastCurrentCostVersion').removeAttr("disabled");
           $('#forecastPriorCostVersion').removeAttr("disabled");
-          $("#forecastPriorTonnage").append('<option selected="">Choose...</option>');
-          $("#forecastPriorCostVersion").append('<option selected="">Choose...</option>');
+          $("#forecastPriorTonnage").append('<option selected="" value="">Choose...</option>');
+          $("#forecastPriorCostVersion").append('<option selected="" value="">Choose...</option>');
           $("#forecastPriorTonnage").append('<%- rederOptions(defaultDropdownValues.postDropDownValues) %>')
           $("#forecastPriorCostVersion").append('<%- rederOptions(defaultDropdownValues.postDropDownValuesForCost) %>')
 
@@ -238,7 +238,7 @@
         if(forecastPriorTonnageType==='forecasts'){
             $('#forecastPriorTonnage option').remove();
             $('#forecastPriorTonnage').removeAttr("disabled");
-            $("#forecastPriorTonnage").append('<option selected="">Choose...</option>');
+            $("#forecastPriorTonnage").append('<option selected="" value="">Choose...</option>');
             $('#forecastPriorTonnage').append(rederOptionsByCondition(defaultDropdownValues.postDropDownValues, forecastCurrentTonnage));
             validateUserInputs()
         }
