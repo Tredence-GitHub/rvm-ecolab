@@ -56,7 +56,7 @@ router.get('/getDropDownValues',function (req,res,next){
                   { type: db.sequelize.QueryTypes.SELECT }
               )
     ]).then(([resultForYTDandMoM, resultForQoQ,resultForCost,resultForForecast]) => {
-      // console.log("allResults",resultForYTDandMoM,resultForQoQ);
+      console.log("allResults","resultForYTDandMoM\n",resultForYTDandMoM,"resultForQoQn\n",resultForQoQ,"resultForForecast\n",resultForForecast);
       let preDropDownValuesForYTD =[],
           postDropDownValuesForYTD =[],
           dropDownValuesForMoM = [],
@@ -70,7 +70,11 @@ router.get('/getDropDownValues',function (req,res,next){
       resultForYTDandMoM.map(item => {
         if(item.period_flag == 'Pre'){preDropDownValuesForYTD.push(item.tonnage_period)}
         if(item.period_flag == 'Post'){postDropDownValuesForYTD.push(item.tonnage_period)}
-        dropDownValuesForMoM.push(item.tonnage_period)
+        if ((req.query.rvmType).toLowerCase() === 'plant') {
+          if(item.period_flag == 'Post'){dropDownValuesForMoM.push(item.tonnage_period)}
+        } else {
+          dropDownValuesForMoM.push(item.tonnage_period)
+        }
       })
 
 
@@ -112,7 +116,7 @@ router.get('/getDropDownValues',function (req,res,next){
         finalData.preDropDownValues = dropDownValuesForForecast.sort()
         finalData.postDropDownValues = dropDownValuesForForecast.sort()
       }
-
+      console.log("final data",finalData);
 
 
 
@@ -162,6 +166,11 @@ router.post('/saveVersionInfo', (req, res) =>{
         failedObj.responseData = []
         res.json(failedObj)
       }
+    }).catch(error =>{
+      console.log("error in inserting data",error);
+      failedObj.responseData = error
+      failedObj.responseDesc = error.message
+      res.json(failedObj)
     })
   } catch (error) {
     console.log("error in api",error);
