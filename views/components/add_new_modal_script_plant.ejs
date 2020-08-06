@@ -35,7 +35,7 @@
       var formData = {};
           if($('#view').val()==='standard'){
               formData["viewName"]               =  $('#viewType').val();
-              formData["viewType"]               =  $('#timeframesType').val();
+              formData["timeframeType"]               =  $('#timeframesType').val();
 
               formData["priorTonTypeStd"]          =  $("#stdPriorTonnageType").val();
               formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
@@ -53,7 +53,7 @@
            }
            else{
              formData["viewName"]               =  $('#viewType').val();
-             formData["viewType"]               =  $('#timeframesType').val();
+             formData["timeframeType"]               =  $('#timeframesType').val();
 
              formData["priorTonTypeForecast"]   =  $("#forecastPriorTonnageType").val();
              formData["priorTonPeriodForecast"]    =  $("#forecastPriorTonnage").val();
@@ -70,6 +70,12 @@
              formData["status"]              =  'Pending';
            }
            formData["selectedView"] = $('#view').val()
+           if(formData["selectedView"] === 'standard'){
+             formData["viewType"] = 'actual';
+           }
+           else if(formData["selectedView"] === 'forecast'){
+              formData["timeframeType"] === 'Full Year'
+           }
           if(validateUserInputs()){
           swal({
             title: "Are you sure?",

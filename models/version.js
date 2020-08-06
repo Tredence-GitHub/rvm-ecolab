@@ -92,6 +92,11 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: true,
 			field: 'Expiry_date'
+		},
+		timeframeType: {
+			type: DataTypes.STRING,
+			allowNull: true,
+			field: 'Timeframe_Type'
 		}
 	}, {
 		tableName: 'version'
