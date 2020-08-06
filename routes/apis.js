@@ -148,7 +148,7 @@ router.post('/saveVersionInfo', (req, res) =>{
   try {
     let versionInfo = req.body
     let versionName = ''
-    if (versionInfo.selectedView === 'standard') {
+    if (versionInfo.viewType === 'actual') {
       versionName = `${versionInfo.viewType} - ${versionInfo.priorTonPeriodStd} vs ${versionInfo.curTonPeriodStd} | ${versionInfo.priorCostEstStd} vs ${versionInfo.curCostEstStd}`
     } else {
       versionName = `${versionInfo.priorTonTypeForecast} vs ${versionInfo.curTonTypeForecast}  - ${versionInfo.priorTonPeriodForecast} vs ${versionInfo.curTonPeriodForecast} | ${versionInfo.priorCostEstForecast} vs ${versionInfo.curCostEstForecast}`

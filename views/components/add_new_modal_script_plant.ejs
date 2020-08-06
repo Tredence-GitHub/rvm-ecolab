@@ -35,13 +35,13 @@
       var formData = {};
           if($('#view').val()==='standard'){
               formData["viewName"]               =  $('#viewType').val();
-              formData["timeframeType"]               =  $('#timeframesType').val();
+              formData["timeframeType"]          =  $('#timeframesType').val();
 
-              formData["priorTonTypeStd"]          =  $("#stdPriorTonnageType").val();
+              formData["priorTonTypeStd"]        =  $("#stdPriorTonnageType").val();
               formData["priorTonPeriodStd"]      =  $('#stdPriorTonnage').val();
               formData["priorCostEstStd"]        =  $("#stdPriorCostVersion").val();
 
-              formData["priorTonTypeStd"]          =  $("#stdCurrentTonnageType").val();
+              formData["priorTonTypeStd"]        =  $("#stdCurrentTonnageType").val();
               formData["curTonPeriodStd"]        =  $("#stdCurrentTonnage").val();
               formData["curCostEstStd"]          =  $("#stdCurrentCostVersion").val();
 
@@ -53,7 +53,7 @@
            }
            else{
              formData["viewName"]               =  $('#viewType').val();
-             formData["timeframeType"]               =  $('#timeframesType').val();
+             formData["timeframeType"]          =  $('#timeframesType').val();
 
              formData["priorTonTypeForecast"]   =  $("#forecastPriorTonnageType").val();
              formData["priorTonPeriodForecast"]    =  $("#forecastPriorTonnage").val();
@@ -69,12 +69,13 @@
              formData["refreshEta"]              =  expiryDate;
              formData["status"]              =  'Pending';
            }
-           formData["selectedView"] = $('#view').val()
-           if(formData["selectedView"] === 'standard'){
+           formData["viewType"] = $('#view').val()
+           if(formData["viewType"] === 'standard'){
              formData["viewType"] = 'actual';
            }
-           else if(formData["selectedView"] === 'forecast'){
-              formData["timeframeType"] === 'Full Year'
+           else if(formData["viewType"] === 'forecast'){
+              formData["timeframeType"] = 'Full Year'
+              
            }
           if(validateUserInputs()){
           swal({
